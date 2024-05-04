@@ -61,7 +61,8 @@ In this case we are updating the player entity. The first parameter in the Updat
 
 We are ready now to be able to calculate collisions. This is as simple as: (for our `Thing thing`)
 
-```     foreach (Thing otherThing in _things.Query(thing.HitBox)) // We query the aabb tree instead of iterating it
+```
+        foreach (Thing otherThing in _things.Query(thing.HitBox)) // We query the aabb tree instead of iterating it
         {
             if (otherThing.Id == thing.Id) continue; // We don't want an entity to collide with itself
             // Collision logic takes place here.
