@@ -21,7 +21,7 @@ Coming soon!
 
 First of all, your entities must implement the `IEqualityComparer' interface. So if your entity class is `Thing` you will have:
 
-```public class Thing : IEqualityComparer<Thing>```
+`public class Thing : IEqualityComparer<Thing>`
 
 Your entities should have an identifier, `int Id` (or any class that you can do HashCode) and another integer, `int Leaf`. It will explained later on. Then implement the methods in the interface. You will end up with something in the likes of: (note that I use a Guid for the Id, it can be an integer or other hashable class)
 
@@ -38,11 +38,12 @@ Your entities should have an identifier, `int Id` (or any class that you can do 
     public int GetHashCode(Thing obj)
     {
         return Id.GetHashCode();
-    }```
+    }
+```
 
 We are redy to use our entity in our game loop. The most important thing we need to declare is our AABBTree collection in which we will store our entities. Like this:
 
-```private readonly AABBTree<Thing> _things = new (1024, 0, 1024);```
+`private readonly AABBTree<Thing> _things = new (1024, 0, 1024);`
 
 The parameters are optional and are only necessary if you want to do optimizations. First parameter is initial capacity, and it is described in the source code as the amount of nodes the tree can hold before it needs to be resized. Second is the expand constant, which expands the items that are added so that they don't need to be updated as often. Defaults to 2f, but you can be fine with 0 if you don't want to optimize this. Last one is the move constant, which expands the items that are moved so that they don't need to be updated as much. Defaults to 4f.
 
@@ -60,12 +61,12 @@ In this case we are updating the player entity. The first parameter in the Updat
 
 We are ready now to be able to calculate collisions. This is as simple as: (for our `Thing thing')
 
-```
-        foreach (Thing otherThing in _things.Query(thing.HitBox)) // We query the aabb tree instead of iterating it
+```     foreach (Thing otherThing in _things.Query(thing.HitBox)) // We query the aabb tree instead of iterating it
         {
             if (otherThing.Id == thing.Id) continue; // We don't want an entity to collide with itself
             // Collision logic takes place here.
-        }```
+        }
+```
 
 ## Other projects you might like
 
