@@ -59,7 +59,7 @@ We need to update the entities inside the aabb tree (unless they have not moved)
 
 In this case we are updating the player entity. The first parameter in the Update is the entity leaf, which we stored when inserting. Second is the hit box.
 
-We are ready now to be able to calculate collisions. This is as simple as: (for our `Thing thing')
+We are ready now to be able to calculate collisions. This is as simple as: (for our `Thing thing`)
 
 ```     foreach (Thing otherThing in _things.Query(thing.HitBox)) // We query the aabb tree instead of iterating it
         {
